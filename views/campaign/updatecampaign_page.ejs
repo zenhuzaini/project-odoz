@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+ 
+  <!-- Include Editor style. -->
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  <%- include ../loadcss %>
+
+  <style>
+    body {
+    padding: 20px;
+  }
+
+  .sample {
+      padding-bottom: 50px;
+      margin-left: 30px;
+      border-top: 1px solid lightgray;
+  }
+
+  .manual {
+      margin-bottom: 20px;
+  }
+  </style>
+
+
+</head>
+
+<body>
+
+   <!-- Include external JS libs. -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+  
+   <!-- Include Editor JS files. -->
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.5.1//js/froala_editor.pkgd.min.js"></script>
+
+   <div class="row">
+    <form class="col s12" action="/addcampaign/editcampaignodoz/<%= editcampaign._id %>" method="POST">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+            <input id="camp_title" name="camp_title" required type="text" class="validate" value="<%= editcampaign.camp_title %>">
+            <label for="camp_title">Title</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">date_range</i>
+                <input type="text" name="camp_date" value="<%= editcampaign.camp_date %>" class="datepicker">
+                <label for="camp_date">Date Published</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="textarea-field col s12">
+                <h4><i class="material-icons prefix">create</i>Campaign Details</h4>
+                <textarea id="edit" name="camp_description"><%= editcampaign.camp_description %></textarea>
+            </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit">Submit
+            <i class="material-icons left">cloud</i>
+        </button>
+
+    </form>
+</div>
+
+  <script>
+    $(function() {
+      $('#edit').froalaEditor({
+
+        imageUploadURL: '/upload_image',
+        imageUploadParams: {
+          id: 'my_editor'
+        },
+
+        fileUploadURL: '/upload_file',
+        fileUploadParams: {
+          id: 'my_editor'
+        },
+
+        imageManagerLoadURL: '/load_images',
+        imageManagerDeleteURL: "/delete_image",
+        imageManagerDeleteMethod: "POST",
+
+        videoUploadURL: '/upload_video',
+      })
+      // Catch image removal from the editor.
+      .on('froalaEditor.image.removed', function (e, editor, $img) {
+        $.ajax({
+          // Request method.
+          method: "POST",
+
+          // Request URL.
+          url: "/delete_image",
+
+          // Request params.
+          data: {
+            src: $img.attr('src')
+          }
+        })
+        .done (function (data) {
+          console.log ('image was deleted');
+        })
+        .fail (function (err) {
+          console.log ('image delete problem: ' + JSON.stringify(err));
+        })
+      })
+      .on('froalaEditor.video.removed', function (e, editor, $video) {
+        $.ajax({
+          // Request method.
+          method: "POST",
+
+          // Request URL.
+          url: "/delete_video",
+
+          // Request params.
+          data: {
+            src: $video.attr('src')
+          }
+        })
+        .done (function (data) {
+          console.log ('video was deleted');
+        })
+        .fail (function (err) {
+          console.log ('video delete problem: ' + JSON.stringify(err));
+        })
+      })
+
+      // Catch image removal from the editor.
+      .on('froalaEditor.file.unlink', function (e, editor, link) {
+
+        $.ajax({
+          // Request method.
+          method: "POST",
+
+          // Request URL.
+          url: "/delete_file",
+
+          // Request params.
+          data: {
+            src: link.getAttribute('href')
+          }
+        })
+        .done (function (data) {
+          console.log ('file was deleted');
+        })
+        .fail (function (err) {
+          console.log ('file delete problem: ' + JSON.stringify(err));
+        })
+      })
+    });
+  </script>
+
+<script>
+        const Calender = document.querySelector('.datepicker');
+        M.Datepicker.init(Calender, {
+            format: 'dd/mmm/yyyy',
+            showClearBtn: true,
+        })
+
+        const timer = document.querySelector('.timepicker');
+        M.Timepicker.init(timer, {
+            showClearBtn:true,
+            i18n:{
+                clear: 'Remove',
+                cancel: 'No',
+                done: 'Yes'
+            }
+        });
+ </script>
+
+</body>
+</html>

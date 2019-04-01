@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include ../loadcss %>
+</head>
+<body>
+    <table class="responsive-table">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>COuntry</th>
+              <th>Address</th>
+              <th>Status</th>
+              <th>ACtion</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% for (var i=0; i < seeAllmember.length; i++) { %>
+          <tr>
+            <td><%= seeAllmember[i].member_name %></td>
+            <td><%= seeAllmember[i].member_country %></td>
+            <td><%= seeAllmember[i].member_address %></td>
+            <td><a
+              class="<%= seeAllmember[i].member_status ? 'waves-effect waves-light btn-small color: yellow' : 'waves-effect waves-light btn-small'%>"
+              href="setstatusmemberodoz/<%= seeAllmember[i]._id %>">
+              <% if (seeAllmember[i].member_status == false) { %>
+                <i class="tiny material-icons">block</i> Not Active
+                <% } else { %>
+                 Active
+                <% } %>
+            </a>
+            </td>
+            <td>
+                <a href="viewmemberodoz/<%= seeAllmember[i]._id %>" class="waves-effect waves-light btn-small"><i class="tiny material-icons">send</i>
+                  Check
+                </a>
+                <a href="editmemberodoz/<%= seeAllmember[i]._id %>" class="waves-effect waves-light btn-small"><i class="tiny material-icons">edit</i>
+                  Edit
+                </a>
+                <a href="deletememberodoz/<%= seeAllmember[i]._id %>"
+                  class="waves-effect waves-light btn-small">
+                Delete
+                </a>
+            </td>
+          </tr>
+        <% } %> 
+        </tbody>
+      </table>
+            
+</body>
+</html>

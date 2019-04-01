@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include ../loadcss %>
+</head>
+<body>
+    <table class="responsive-table">
+        <thead>
+          <tr>
+              <th>What ?</th>
+              <th>What's Inside</th>
+              <th>Date Issue</th>
+              <!-- <th>By</th> -->
+              <th>ACtion</th>
+              <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% for (var i=0; i < seeAllevents.length; i++) { %>
+          <tr>
+            <td><%= seeAllevents[i].event_title %></td>
+            <td><%= seeAllevents[i].event_date %></td>
+            <td><%- seeAllevents[i].event_description %></td>
+            
+            <td>
+                <a href="vieweventodoz/<%= seeAllevents[i]._id %>" class="waves-effect waves-light btn-small"><i class="tiny material-icons">send</i>
+                  Check
+                </a>
+                <a href="editeventodoz/<%= seeAllevents[i]._id %>" class="waves-effect waves-light btn-small"><i class="tiny material-icons">edit</i>
+                  Edit
+                </a>
+                <a href="deleteeventodoz/<%= seeAllevents[i]._id %>"
+                  class="waves-effect waves-light btn-small">
+                Delete
+                </a>
+            </td>
+            <td><a
+              class="<%= seeAllevents[i].event_status ? 'waves-effect waves-light btn-small color: yellow' : 'waves-effect waves-light btn-small'%>"
+              href="setstatuseventodoz/<%= seeAllevents[i]._id %>">
+              <% if (seeAllevents[i].event_status == false) { %>
+                <i class="tiny material-icons">block</i> Not Active
+                <% } else { %>
+                 Active
+                <% } %>
+            </a>
+            </td>
+          </tr>
+        <% } %> 
+        </tbody>
+      </table>
+            
+</body>
+</html>

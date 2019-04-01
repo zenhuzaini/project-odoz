@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include ../loadcss %>
+</head>
+<body>
+    <!--  Form start -->
+    <div class="row">
+            <form class="col s12" action="/member/editmemberodoz/<%= editmember._id %>" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                    <input id="member_name" name="member_name" type="text" class="validate" value="<%= editmember.member_name %>">
+                    <label for="member_nama">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">public</i>
+                        <input id="member_country" name="member_country" type="text" class="validate" value="<%= editmember.member_country %>">
+                        <label for="member_country">Country Origin</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">location_on</i>
+                        <input id="member_address" name="member_address" type="text" class="validate" value="<%= editmember.member_country %>">
+                        <label for="member_address">Current Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">email</i>
+                            <input id="member_mail" name="member_mail" type="email" class="validate" value="<%= editmember.member_mail %>">
+                            <label for="member_mail">Email</label>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">security</i>
+                        <input id="member_password" name="member_password" type="password" class="validate" value="<%= editmember.member_password %>">
+                        <label for="member_password">Password</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12">
+                    <div class="input-field s6">
+                        <i class="material-icons prefix">insert_link</i>
+                        <input id="member_link" name="member_link" type="email" class="validate" value="<%= editmember.member_link %>">
+                        <label for="email_inline">links</label>
+                        <span class="helper-text" data-error="wrong" data-success="right">you can put your links. Like Facebook or blogs</span>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">public</i>
+                        <input id="member_testimony" name="member_testimony" type="text" class="validate" value="<%= editmember.member_testimony %>">
+                        <label for="member_testimony">Country Origin</label>
+                    </div>
+                </div>
+
+                <button class="btn waves-effect waves-light" type="submit">Submit
+                    <i class="material-icons left">cloud</i>
+                </button>
+            </form>
+          </div>
+    <!-- End Form -->
+
+    <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
+</body>
+</html>

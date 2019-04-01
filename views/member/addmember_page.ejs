@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include ../loadcss %>
+</head>
+<body>
+    <!--  Form start -->
+    <div class="row">
+        <span>
+            <% if (msg == 2) {%>
+            <label for="">File size is too large!</label>
+            <% }else if (msg == 3) { %>
+            <label for="">Invalid file type. Only JPG, PNG or GIF file are allowed.</label>
+             <% } %>    
+        </span>
+            <form class="col s12" action="/member/post_addmemberodoz" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                    <input id="member_name" name="member_name" type="text" class="validate">
+                    <label for="member_nama">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">public</i>
+                        <input id="member_country" name="member_country" type="text" class="validate">
+                        <label for="member_country">Country Origin</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">location_on</i>
+                        <input id="member_address" name="member_address" type="text" class="validate">
+                        <label for="member_address">Current Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">email</i>
+                            <input id="member_mail" name="member_mail" type="email" class="validate">
+                            <label for="member_mail">Email</label>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">security</i>
+                        <input id="member_password" name="member_password" type="password" class="validate">
+                        <label for="member_password">Password</label>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12">
+                    <div class="input-field s6">
+                        <i class="material-icons prefix">insert_link</i>
+                        <input id="member_link" name="member_link" type="url" class="validate">
+                        <label for="email_inline">links</label>
+                        <span class="helper-text" data-error="wrong / example: http://www.odoz.com" data-success="right">you can put your links. Like Facebook or blogs</span>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">speaker_notes</i>
+                        <input id="member_testimony" name="member_testimony" type="text" class="validate">
+                        <label for="member_testimony">Country Origin</label>
+                    </div>
+                </div>
+                <div class="file-field input-field">
+                        <div class="btn">
+                          <span>File</span>
+                          <input type="file" name="member_fotopath">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate" name="member_fotopath" type="text">
+                        </div>
+                </div>
+                <!-- <input type="file" name="member_fotopath"> -->
+                <button class="btn waves-effect waves-light" type="submit">Submit
+                    <i class="material-icons left">cloud</i>
+                </button>
+            </form>
+    </div>
+    <!-- End Form -->
+</body>
+</html>
