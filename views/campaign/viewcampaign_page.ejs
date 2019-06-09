@@ -1,5 +1,80 @@
-<%= viewcampaign._id %>
-<%= viewcampaign.camp_title %>
-<%= viewcampaign.camp_date %>
-<%- viewcampaign.camp_description %>
-<img src="<%- viewcampaign.camp_fotopath %>" alt="">
+<!DOCTYPE html>
+<html class="full-height" lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <meta name="description" content="Material design landing page template built by TemplateFlip.com"/>
+    <%- include ../loadcssmat_temp %>
+  </head>
+  
+  <body id="top">
+    <%- include ../header.ejs %>
+
+<div id="content">
+<section class="py-5" id="campaign">
+<div class="container">
+        <div class="wow fadeIn">
+          <h2 class="text-center h1 my-4">Let's Help Them :)</h2>
+          <p class="px-5 mb-5 pb-3 lead blue-grey-text text-center">
+              Abu Huraira reported: The Messenger of Allah, peace and blessings be upon him, said, <i> “Charity does not decrease wealth, no one forgives another except that Allah increases his honor, and no one humbles himself for the sake of Allah except that Allah raises his status.” </i>
+              - Ṣaḥīḥ Muslim 2588
+          </p>
+        </div>
+        
+        <div class="row wow fadeInLeft" data-wow-delay=".3s">
+       
+          <div class="col-lg-12">
+            <div class="row mb-12">
+              <div class="col-1 mr-1"><i class="fa fa-book fa-2x cyan-text"></i></div>
+              <div class="col-10">
+                <h5 class="font-bold"><%= viewcampaign.camp_title %></h5>
+                <p class="grey-text">
+                    <%- viewcampaign.camp_description %>
+                </p>
+
+              </div>
+            </div>
+            
+            <div class="row mb-12">
+              <div class="col-1 mr-1"><i class="fa fa-money fa-2x deep-purple-text"></i></div>
+              <div class="col-10">
+                <h5 class="font-bold">Needed Fund</h5>
+                <p class="black-text">
+                  Help us to collect <b><%= viewcampaign.camp_fund_needed %></b> to help them.
+                </p>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-1 mr-1"><i class="fa fa-code fa-2x red-text"></i></div>
+                <div class="col-10">
+                  <h5 class="font-bold">Detailed Information</h5>
+                  <p class="black-text">
+                      The charity collected is 
+                      <% var total=0;
+                      for (var i=0; i < seeAllcampaigns.length; i++) { 
+                        if (seeAllcampaigns[i].cdonation_id_camp == viewcampaign._id){
+                          total += seeAllcampaigns[i].cdonation_amount;
+                        }
+                      }
+                      %><b><%= jumlah %></b>. The deadline for this fnd is <%= viewcampaign.camp_collect_until %>.
+                  </p>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        <hr/>
+</div>
+</section>
+
+<% include ./give_donation_form.ejs %>
+
+</div>
+    
+    <%- include ../footer %>
+    <%- include ../loadjsmat_temp %>
+  </body>
+</html>

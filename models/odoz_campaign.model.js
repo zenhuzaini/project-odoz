@@ -5,6 +5,8 @@ var CampSchema = new mongoose.Schema({
     camp_description: String,
     camp_fotopath: String,
     camp_creator: String,
+    camp_fund_needed: String,
+    camp_collect_until: String,
     camp_status: {
         type: Boolean,
         default: false
