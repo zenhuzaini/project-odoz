@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var upload    = require('./upload');
 
 var db_member_odoz = require('../models/odoz_member.model.js');
+var db_dailydonation_odoz = require('../models/odoz_dailydonation.model.js');
 
 //<--fungsi GET--> read
 router.get('/', function(req, res, next){  
@@ -11,16 +12,17 @@ router.get('/', function(req, res, next){
 });
 
 // <--fungsi get--> add page
-router.get('/addmemberodoz', function(req, res, next){  
-    res.render('member/addmember_page', { title: 'Berhasil', msg:req.query.msg });
+router.get('/addmemberodoz', function(req, res, next){
+  sess=req.session; 
+  var nav;
+  if(sess.email){
+    nav= '<a class="btn btn-primary btn-rounded my-0" href="/member/addmemberodoz" target="_blank">'+sess.email+'</a>';
+    res.redirect('/logout', { title: 'ODOZ | Login', nav });
+  }else{
+    nav = '<a class="btn btn-primary btn-rounded my-0" href="/member/addmemberodoz" target="_blank">Join Us!</a>';
+    res.render('member/addmember_page', { title: 'Sign Up - ODOZ',  msg:req.query.msg, nav });
+  }  
 });
-
-// // <--fungsi POST--> add
-// router.post('/post_addmemberOdoz', function(req, res, next){  
-//     const addNewMember = new db_member_odoz(req.body);
-//     addNewMember.save();
-//     res.redirect('listmemberodoz');
-// });
 
 router.post('/post_addmemberOdoz', function(req, res, next){  
     upload(req, res,(error) => {
@@ -60,15 +62,8 @@ router.post('/post_addmemberOdoz', function(req, res, next){
 
 // <--fungsi get--> add
 router.get('/listmemberodoz', async function(req, res, next){ 
-    sesi = req.session;
-    
         const seeAllmember = await db_member_odoz.find();
         res.render('member/listmember_page', { title: 'Berhasil', seeAllmember });
-        console.log('berhasil session');
- 
-        res.write('login dulu');
-        // res.redirect('/member/login', {pesan: "You first must login"});
-        console.log('enggak berhasil session');
   
 });
 
@@ -100,15 +95,24 @@ router.get('/setstatusmemberodoz/:id', async function(req, res, next) {
 
 router.get('/viewmemberodoz/:id', async function(req, res, next) {
     const viewmember = await db_member_odoz.findById(req.params.id);
+    const nav ='<h1>Nav</h1>'
     console.log(viewmember)
-    res.render('member/viewmember_page', { viewmember });
+    res.render('member/viewmember_page', { viewmember, nav });
 });
 
 
 //Baru Diimplementasikan
-//<--fungsi GET--> Unuk Login
-router.get('/login', function(req, res, next){  
-    res.render('v_registerlogin/login', { title: 'Laman Awal' });
+
+router.get('/login', function(req, res, next){
+  sess=req.session; 
+  var nav;
+  if(sess.email){
+    nav= '<a class="btn btn-primary btn-rounded my-0" href="/member/addmemberodoz" target="_blank">'+sess.email+'</a>';
+    res.redirect('/', { title: 'ODOZ', nav });
+  }else{
+    nav = '<a class="btn btn-primary btn-rounded my-0" href="/member/addmemberodoz" target="_blank">Join Us!</a>';
+    res.render('member/loginmember_page', { title: 'ODOZ | Login', nav });
+  }  
 });
 
 //<--fungsi POST--> Untuk Login
@@ -117,14 +121,10 @@ router.post('/loginauth', function (req, res, next) {
 	db_member_odoz.findOne({member_mail:req.body.member_mail},function(err,dataku){
 		if(dataku){
 			if(dataku.member_password==req.body.member_password){
-				//console.log("Done Login");
-				// req.session.usernya = req.body.member_mail;
-                //console.log(req.session.userId);
-                sess = req.session;
-                var sesinya = req.body.member_mail;
-                sess.sesinya;
-
-                res.send({"Success":"Success!"});
+        sess=req.session;
+        sess.email=req.body.member_mail;
+        res.send({"Success":"Success!"});
+        console.log('Session is made : '+ sess.email);
 			}else{
 				res.send({"Success":"Wrong password!"});
 			}
@@ -132,6 +132,25 @@ router.post('/loginauth', function (req, res, next) {
 			res.send({"Success":"This Email Is not regestered!"});
 		}
 	});
+});
+
+router.get('/admin', async function(req, res, next){
+  sess=req.session;
+  var mysort = { ddonation_transactionID: -1 };
+  const viewadmin = await db_member_odoz.findOne({member_mail:sess.email});
+  const getdailydonationinfo = await db_dailydonation_odoz.find({member_mail:sess.email}).limit(7).sort(mysort);
+  const getdailydonationinfo2 = await db_dailydonation_odoz.find({member_mail:sess.email});
+
+  var nav;
+  if(sess.email){  
+    console.log('halo ', sess); 
+    res.render('admin/base_coba', { title: 'ODOZ | Login', viewadmin, getdailydonationinfo, getdailydonationinfo2 });
+    console.log('viewadmin');
+  }
+  else{
+    console.log('login dulu');
+    res.render('admin/loginmember_mustlogin', { title: 'Login or Regitser - ODOZ', nav});  
+  }
 });
 
 router.get('/logout', function (req, res, next) {
@@ -148,41 +167,4 @@ router.get('/logout', function (req, res, next) {
 }
 });
 
-
-
-
-
-
-
-// // <--fungsi POST--> add
-// router.post('/post_addmemberOdoz', function(req, res, next){  
-//     member_odoz.create(req.body, function(err, post){
-//         if(err) return next(err);
-// 		res.json(post);
-//     });
-// });
-
-//fungsi get /guru/id
-// router.get('/:id', function(req, res, next){  
-//     member_odoz.findById(req.params.id, function(err, post){
-//         if(err) return next(err);
-//         res.json(post);
-//     });
-// });
-
-// //fungsi PUT /guru/id
-// router.put('/:id', function(req, res, next){  
-//     member_odoz.findByIdAndUpdate(req.params.id, req.body, function(err, post){
-//         if(err) return next(err);
-//         res.json(post);
-//     });
-// });
-
-// //fungsi DELETE /guru/id
-// router.delete('/:id', function(req, res, next){  
-//     member_odoz.findByIdAndRemove(req.params.id, req.body, function(err, post){
-//         if(err) return next(err);
-//         res.json(post);
-//     });
-// });
 module.exports = router;

@@ -1,0 +1,31 @@
+<section class="text-center py-5 white darken-1 text-white" id="pricing">
+  <div class="container">
+    <div class="row">
+      <!-- Card element -->
+      <% for (var i=0; i<seeAllarticle.length; i++) { %>
+          <div class="col s12 m4">
+              <div class="card hoverable">
+    
+              <div class="card-image">
+                  <img src="https://i2.wp.com/www.123freevectors.com/wp-content/original/100925-blue-circle-pattern.jpg" height="100%" width="100%">
+                  <a href="blog.html"><i class="material-icons">chevron_right</i></a>
+              </div>
+    
+                <div class="card-content">
+    
+                  <p class="grey-text">28 March, 2017</p>
+                  <h5 style="font-weight: bold; color:black;"><%= seeAllarticle[i].article_title %></h5>
+                  <p class=" grey-text text-darken-2" style="margin-left: 10%; margin-right: 10%">Explore these python blogs on how to code in python 3 and how to make various applications in python from scratch. We have covered python 3, Tkinter and many more things.</p>
+    
+              </div>
+              <hr>
+              <div style="margin-bottom: 3%;">
+                  <a href="article/viewarticleodoz/<%= seeAllarticle[i]._id %>">Read More</a>
+                </div>
+    
+              </div> <!-- Card div ends -->
+          </div> <!-- col div ends -->
+      <% } %>
+    </div> <!-- row div ends -->
+  </div>
+</section>

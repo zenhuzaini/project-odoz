@@ -2,7 +2,7 @@ const multer = require('multer');
 const path   = require('path');
 
 const storageEngine = multer.diskStorage({
-    destination: './public/files_even',
+    destination: './public/files_event',
     filename: function(req, file, fn){
       fn(null,  new Date().getTime().toString()+'-'+file.fieldname+path.extname(file.originalname));
     }

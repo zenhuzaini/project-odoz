@@ -40,8 +40,8 @@
    <!-- Include Editor JS files. -->
    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.5.1//js/froala_editor.pkgd.min.js"></script>
 
-   <div class="row">
-    <form class="col s12" action="/addarticle/post_addarticle" method="POST">
+    <div class="row">
+    <form class="col s12" action="/article/post_addarticle" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
@@ -50,14 +50,30 @@
             </div>
         </div>
         <div class="row">
-          <h2>Deskripsi</h2>
+          <div class="input-field col s12">
+              <i class="material-icons prefix">date_range</i>
+              <input type="text" name="article_date" class="datepicker">
+              <label for="article_date">Date Published</label>
+          </div>
+        </div>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" name="article_fotopath">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" name="article_fotopath" type="text">
+          </div>
+        </div>
+        <div class="row">
+          <h3>Description</h3>
             <textarea id="edit" name="article_description"></textarea>
         </div>
 
         <input type="submit">
 
     </form>
-</div>
+    </div>
 
   <script>
     $(function() {
@@ -145,6 +161,24 @@
       })
     });
   </script>
+
+<script>
+  const Calender = document.querySelector('.datepicker');
+  M.Datepicker.init(Calender, {
+      format: 'dd/mmm/yyyy',
+      showClearBtn: true,
+  })
+
+  const timer = document.querySelector('.timepicker');
+  M.Timepicker.init(timer, {
+      showClearBtn:true,
+      i18n:{
+          clear: 'Remove',
+          cancel: 'No',
+          done: 'Yes'
+      }
+  });
+</script>
 
 </body>
 

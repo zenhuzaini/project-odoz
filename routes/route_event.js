@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var upload    = require('./uploadevent');
 
 var db_event_odoz = require('../models/odoz_event.model.js');
+var col_event_visitor = require('../models/odoz_eventvisitor.model.js');
+var db_member_odoz = require('../models/odoz_member.model.js');
 
 //<--fungsi GET--> read
 router.get('/', function(req, res, next){  
@@ -40,6 +42,7 @@ router.post('/post_addevent', function(req, res, next){
                 event_title: req.body.event_title,
                 event_time: req.body.event_time,
                 event_date: req.body.event_date,
+                event_creator : 'zen96ev@gmail.com',
                 event_description: req.body.event_description
               };
     
@@ -74,7 +77,6 @@ router.post('/editeventodoz/:id', async function(req, res, next) {
     res.redirect('/event/listeventodoz');
 });
 
-
 router.get('/deleteeventodoz/:id', async function(req, res, next) {
     let { id } = req.params;
     await db_event_odoz.remove({_id: id});
@@ -91,8 +93,50 @@ router.get('/setstatuseventodoz/:id', async function(req, res, next) {
 
 router.get('/vieweventodoz/:id', async function(req, res, next) {
     const viewevent = await db_event_odoz.findById(req.params.id);
-    console.log(viewevent)
-    res.render('event/viewevent_page', { viewevent });
+    console.log(viewevent);
+    sess=req.session; 
+    var nav;
+    if(sess.email){
+      nav= '<a class="btn btn-primary btn-rounded my-0" href="/member/admin" target="_blank">'+sess.email+'</a><a class="btn btn-danger btn-rounded my-0" href="/logout" target="_blank">logout</a>';
+    }else{
+      nav = '<a class="btn btn-primary btn-rounded my-0" href="/member/addmemberodoz" target="_blank">Join us!</a><a class="btn btn-success btn-rounded my-0" href="/member/login" target="_blank">Login</a>';
+    }
+    var thequery = {event_id : req.params.id};
+    const seeallvisitors = await col_event_visitor.find(thequery);
+    const berapavisistor = seeallvisitors.length;
+
+    res.render('event/viewevent_page', { viewevent, nav, berapavisistor });
 });
+
+// <--fungsi POST--> register
+router.post('/registerevent', function(req, res, next){  
+    const eventvisitor = new col_event_visitor(req.body);
+    eventvisitor.save();
+    const idnya = req.body.event_id;
+    console.log(idnya);
+    res.redirect('vieweventodoz/'+ req.body.event_id);
+});
+
+// <--fungsi get-- admin> 
+router.get('/myevents', async function(req, res, next){
+  sess=req.session;
+
+  const viewadmin = await db_member_odoz.findOne({member_mail:sess.email});
+
+  var thequery = {event_creator : sess.email}; 
+  const seeevents = await db_event_odoz.find(thequery);
+ 
+  var nav;
+  if(sess.email){  
+    console.log('halo ', sess); 
+    res.render('admin/event_admin_listevents', { title: 'List Article | ODOZ', viewadmin, seeevents });
+    console.log(seeevents);
+  }
+  else{
+    console.log('login dulu');
+    res.render('admin/loginmember_mustlogin', { title: 'Login or Regitser - ODOZ', nav});
+  }
+});
+
 
 module.exports = router;

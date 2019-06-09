@@ -1,91 +1,138 @@
+
+
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
+<html class="full-height" lang="en-US">
+  <head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%- include ../loadcss %>
-</head>
-<body>
-    <!--  Form start -->
-    <div class="row">
-        <span>
-            <% if (msg == 2) {%>
-            <label for="">File size is too large!</label>
-            <% }else if (msg == 3) { %>
-            <label for="">Invalid file type. Only JPG, PNG or GIF file are allowed.</label>
-             <% } %>    
-        </span>
-            <form class="col s12" action="/member/post_addmemberodoz" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
-                    <input id="member_name" name="member_name" type="text" class="validate">
-                    <label for="member_nama">Name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">public</i>
-                        <input id="member_country" name="member_country" type="text" class="validate">
-                        <label for="member_country">Country Origin</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">location_on</i>
-                        <input id="member_address" name="member_address" type="text" class="validate">
-                        <label for="member_address">Current Address</label>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">email</i>
-                            <input id="member_mail" name="member_mail" type="email" class="validate">
-                            <label for="member_mail">Email</label>
+    <title>Material Landing</title>
+    <meta name="description" content="Material design landing page template built by TemplateFlip.com"/>
+    <%- include ../loadcssmat_temp %>
+  </head>
+  <body id="top" style="background-image:url('https://c.o0bg.com/rf/image_960w/Boston/2011-2020/2014/07/19/BostonGlobe.com/Foreign/Images/8d3d4f32baad405e8980dc9350d34636-8d3d4f32baad405e8980dc9350d34636-0.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <header>
+      <!-- Navbar-->
+      <%- include ../navbar.ejs %>
+      <!-- Intro Section-->
+      <div class="rgba-black-strong py-5">
+        <div class="container">
+          <div class="wow fadeIn">
+            <h2 class="h1 text-white pt-5 pb-3 text-center">Register Now</h2>
+            <p class="text-white px-5 mb-5 pb-3 lead text-center">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate
+              esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+            </p>
+          </div>
+          <div class="card mb-5 wow fadeInUp" data-wow-delay=".4s" style="margin-left: 20%; margin-right: 20%">
+            <div class="card-body p-5">
+              <div class="row">
+                <div class="col-md-12">
+                  <form action="/member/post_addmemberodoz" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="md-form">
+                          <input class="form-control" id="member_name" name="member_name" type="text" required="required"/>
+                          <label for="name">Your name</label>
                         </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">security</i>
-                        <input id="member_password" name="member_password" type="password" class="validate">
-                        <label for="member_password">Password</label>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col s12">
-                    <div class="input-field s6">
-                        <i class="material-icons prefix">insert_link</i>
-                        <input id="member_link" name="member_link" type="url" class="validate">
-                        <label for="email_inline">links</label>
-                        <span class="helper-text" data-error="wrong / example: http://www.odoz.com" data-success="right">you can put your links. Like Facebook or blogs</span>
-                    </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">speaker_notes</i>
-                        <input id="member_testimony" name="member_testimony" type="text" class="validate">
-                        <label for="member_testimony">Country Origin</label>
-                    </div>
-                </div>
-                <div class="file-field input-field">
-                        <div class="btn">
-                          <span>File</span>
-                          <input type="file" name="member_fotopath">
+                      </div>
+                      <div class="col-md-6">
+                        <div class="md-form">
+                          <input class="form-control" id="member_country" name="member_country" type="text" required="required"/>
+                          <label for="email">Country</label>
                         </div>
-                        <div class="file-path-wrapper">
-                          <input class="file-path validate" name="member_fotopath" type="text">
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="md-form">
+                            <input class="form-control" id="member_mail" name="member_mail" type="email" required="required"/>
+                            <label for="name">Email</label>
+                          </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="md-form">
+                            <input class="form-control" id="member_password" name="member_password" type="password" required="required"/>
+                            <label for="email">Password</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="row">
+                     <div class="col-md-12">
+                        <div class="md-form">
+                          <textarea class="md-textarea" id="member_address" name="member_address" type="text" required="required"></textarea>
+                          <label for="message">Address</label>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="md-form">
+                          <input class="form-control" id="member_link" name="member_link" type="url" required="required"/>
+                          <label for="subject">Url</label>
+                          <span class="helper-text" data-error="wrong / example: http://www.odoz.com" data-success="right">you can put your links. Like Facebook or blogs</span>
+                        </div>
+                      </div>
+                     
+                      <div class="col-md-12">
+                        <div class="md-form">
+                          <textarea class="md-textarea" id="member_testimony" name="member_testimony" type="text" required="required"></textarea>
+                          <label for="message">in my opinion ...</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                <span>File</span>
+                                <input type="file" name="member_fotopath">
+                                </div>
+                                <div class="file-path-wrapper">
+                                <input class="file-path validate" name="member_fotopath" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="center-on-small-only mb-4">
+                      <button class="btn btn-indigo ml-0" type="submit"><i class="fa fa-paper-plane-o mr-2"></i> Send</button>
+                    </div>
+                  </form>
                 </div>
-                <!-- <input type="file" name="member_fotopath"> -->
-                <button class="btn waves-effect waves-light" type="submit">Submit
-                    <i class="material-icons left">cloud</i>
-                </button>
-            </form>
-    </div>
-    <!-- End Form -->
-</body>
+                <!-- <div class="col-md-4">
+                  <ul class="list-unstyled text-center">
+                    <li class="mt-4"><i class="fa fa-map-marker indigo-text fa-2x"></i>
+                      <p class="mt-2">140, City Center, New York, U.S.A</p>
+                    </li>
+                    <li class="mt-4"><i class="fa fa-phone indigo-text fa-2x"></i>
+                      <p class="mt-2">+ 01 234 567 89</p>
+                    </li>
+                    <li class="mt-4"><i class="fa fa-envelope indigo-text fa-2x"></i>
+                      <p class="mt-2">contact@company.com</p>
+                    </li>
+                  </ul>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%- include ../footer %>
+
+    </header>   
+    <%- include ../loadjsmat_temp %>
+  </body>
 </html>
+
+
+    <span>
+        <% if (msg == 2) {%>
+        <label for="">File size is too large!</label>
+        <% }else if (msg == 3) { %>
+        <label for="">Invalid file type. Only JPG, PNG or GIF file are allowed.</label>
+         <% } %>    
+    </span>
+       

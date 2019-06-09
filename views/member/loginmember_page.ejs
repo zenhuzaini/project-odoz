@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html class="full-height" lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <meta name="description" content="Material design landing page template built by TemplateFlip.com"/>
+    <%- include ../loadcssmat_temp %>
+    <style>
+        .mssg{
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $( "#form" ).submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/member/loginauth',
+                    data: $('#form').serialize(),
+                    dataType: "json",
+                    success: function(response){
+                        //alert("a");
+                        //console.log(response.Success);
+                        $('#form')[0].reset();
+                        document.getElementById("check").innerHTML=response.Success;
+                            //ADD THIS CODE
+                            setTimeout(function(){
+                                document.getElementById("check").innerHTML="";
+                            },10000);
+                            if (response.Success=="Success!") {
+                                document.getElementById("aa").click();
+                            };
+                        },
+                        error: function() {
+                        }
+                    })
+            });
+        });
+    </script>
+  </head>
+  <body id="top" style="background-image:url('https://c.o0bg.com/rf/image_960w/Boston/2011-2020/2014/07/19/BostonGlobe.com/Foreign/Images/8d3d4f32baad405e8980dc9350d34636-8d3d4f32baad405e8980dc9350d34636-0.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <header>
+      <!-- Navbar-->
+      <%- include ../navbar.ejs %>
+      <!-- Intro Section-->
+      <div class="rgba-black-strong py-5">
+        <div class="container">
+          <div class="wow fadeIn">
+            <h2 class="h1 text-white pt-5 pb-3 text-center"><%= title %></h2>
+            <p class="text-white px-5 mb-5 pb-3 lead text-center">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate
+              esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+            </p>
+          </div>
+          <div class="card mb-5 wow fadeInUp" data-wow-delay=".4s" style="margin-left: 20%; margin-right: 20%">
+            <div class="card-body p-5">
+              <div class="row">
+                <div class="col-md-12">
+                        <div class="form-group">
+                                <form id="form" method="post" >
+                                    <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="md-form">
+                                                <input class="form-control" id="member_mail" name="member_mail" type="text" required="required"/>
+                                                <label for="name">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="md-form">
+                                                <input class="form-control" id="member_password" name="member_password" type="text" required="required"/>
+                                                <label for="password">Password</label>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="col-md-4">
+                                                <div class="center-on-small-only mb-4">
+                                                    <button class="btn btn-indigo ml-0" type="submit"><i class="fa fa-paper-plane-o mr-2"></i> Login</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                            <div class="mssg bg-danger">
+                                <span id="check" ></span>
+                            </div>
+                            <!-- when sucessfull -->
+                            <div id="LangTable"><a href="admin" id="aa"></a> </div>     
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+    </header>   
+    <%- include ../footer %>
+    <%- include ../loadjsmat_temp %>
+    
+  </body>
+</html>
+

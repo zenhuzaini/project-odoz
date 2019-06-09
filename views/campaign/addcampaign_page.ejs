@@ -41,7 +41,7 @@
    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.5.1//js/froala_editor.pkgd.min.js"></script>
 
    <div class="row">
-    <form class="col s12" action="/addcampaign/post_addcampaign" method="POST" enctype="multipart/form-data">
+    <form class="col s12" action="/campaign/post_addcampaign" method="POST" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
@@ -65,6 +65,23 @@
               <input class="file-path validate" name="camp_fotopath" type="text">
             </div>
         </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">date_range</i>
+                <input type="text" name="camp_collect_until" class="datepicker">
+                <label for="camp_collect_until">Collect Until</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">money</i>
+            <input id="camp_fund_needed" name="camp_fund_needed" required type="text" class="validate">
+            <label for="camp_fund_needed">Fund Needed</label>
+            </div>
+        </div>
+
         <div class="row">
             <div class="textarea-field col s12">
                 <h4><i class="material-icons prefix">create</i>Campaign Details</h4>
@@ -79,40 +96,7 @@
     </form>
 </div>
 
-<!-- date picker -->
-    <!-- <div class="container"> -->
-        <div class="row">
-            <div class="col s12 m3"></div>
-            <div class="col s12 m6">
-                <h3>DatePicker</h3>
-                <!-- <form action=""> -->
-                    <div class="input-field">
-                        <input type="text" class="datepicker">
-                    </div>
-                <!-- </form> -->
-            </div>
-            <div class="col s12 m3"></div>
-        </div>
-    <!-- </div> -->
-
-    
-
-    <!-- time selector -->
-    <div class="row">
-        <div class="col s12 m3"></div>
-        <div class="col s12 m6">
-            <h3>Time Picker</h3>
-            <!-- <form action=""> -->
-                <div class="input-field">
-                    <input type="time" class="timepicker" name="campaign_date">
-                    <label for="time">Set Time</label>
-                </div>
-            <!-- </form> -->
-        </div>
-        <div class="col s12 m3"></div>
-    </div>
-    <!-- script for time picker -->
-
+ 
   <script>
     $(function() {
       $('#edit').froalaEditor({
@@ -200,7 +184,7 @@
     });
   </script>
 
-<script>
+  <script>
         const Calender = document.querySelector('.datepicker');
         M.Datepicker.init(Calender, {
             format: 'dd/mmm/yyyy',
@@ -216,7 +200,7 @@
                 done: 'Yes'
             }
         });
- </script>
+  </script>
 
 </body>
 </html>

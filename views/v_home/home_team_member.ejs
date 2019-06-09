@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="wow fadeIn">
+      <h2 class="h1 pt-5 pb-3 text-center">Our team members</h2>
+      <p class="px-5 mb-5 pb-3 lead text-center blue-grey-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate
+        esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+      </p>
+    </div>
+    <div class="row mb-lg-4 center-on-small-only">
+        <% for (var i=0; i<seeAllmember.length; i++) { %>
+      <div class="col-lg-6 col-md-12 mb-r wow fadeInLeft" data-wow-delay=".3s">
+        <div class="col-md-6 float-left"><img class="img-fluid rounded z-depth-1 mb-3" src="<%= seeAllmember[i].member_fotopath %>" alt="team member"/></div>
+        <div class="col-md-6 float-right">
+          <div class="h4"><%= seeAllmember[i].member_name %></div>
+          <h6 class="font-bold blue-grey-text mb-4"><%= seeAllmember[i].member_country %></h6>
+          <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.</p><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i><span class="ml-1">@nicolewest</span></a>
+        </div>
+      </div>
+      <% } %>
+      <!-- <div class="col-lg-6 col-md-12 mb-r wow fadeInRight" data-wow-delay=".3s">
+        <div class="col-md-6 float-left"><img class="img-fluid rounded z-depth-1 mb-3" src="img/woman-2.jpg" alt="team member"/></div>
+        <div class="col-md-6 float-right">
+          <div class="h4">Hannah Cruz</div>
+          <h6 class="font-bold blue-grey-text mb-4">Photographer</h6>
+          <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.</p><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i><span class="ml-1">@hannahcruz</span></a>
+        </div>
+      </div> -->
+    </div>
+    <div class="row center-on-small-only">
+      <div class="col-lg-6 col-md-12 mb-r wow fadeInLeft" data-wow-delay=".3s">
+        <div class="col-md-6 float-left"><img class="img-fluid rounded z-depth-1 mb-3" src="img/man-1.jpg" alt="team member"/></div>
+        <div class="col-md-6 float-right">
+          <div class="h4">Mark Hall</div>
+          <h6 class="font-bold blue-grey-text mb-4">Web Developer</h6>
+          <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.</p><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i><span class="ml-1">@markhall</span></a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 mb-r wow fadeInRight" data-wow-delay=".3s">
+        <div class="col-md-6 float-left"><img class="img-fluid rounded z-depth-1 mb-3" src="img/man-2.jpg" alt="team member"/></div>
+        <div class="col-md-6 float-right">
+          <div class="h4">Vincent Harris</div>
+          <h6 class="font-bold blue-grey-text mb-4">Web Developer</h6>
+          <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.</p><a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i><span class="ml-1">@vincentharris</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
